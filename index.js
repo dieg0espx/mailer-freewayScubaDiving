@@ -47,7 +47,7 @@ app.post('/bookingPayment', async (req, res) => {
         event:event, 
         date: date, 
         people: people,
-        cost: amount,
+        amount: amount,
         link: link
       }
     };
