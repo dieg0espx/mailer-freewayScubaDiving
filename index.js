@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a route
 app.post('/bookingPayment', async (req, res) => {
-  // const { name, email, link } = req.body;
+  const { name, email, phone, event, date, people, amount, link } = req.body;
 
   try {
     const transporter = nodemailer.createTransport({
@@ -37,17 +37,23 @@ app.post('/bookingPayment', async (req, res) => {
 
     const mailOptions = {
       from: 'Freeway Scuba Diving',
-      to: 'tecnodael@gmail.com',
+      to: email,
       subject: 'Complete Booking',
       template: 'email',
-      // context: {
-      //   name: name,
-      //   link: link
-      // }
+      context: {
+        name: name,
+        phone: phone,
+        email: email,
+        event:event, 
+        date: date, 
+        people: people,
+        cost: amount,
+        link: link
+      }
     };
 
     const info = await transporter.sendMail(mailOptions);
-    // console.log('Email sent: ' + info.response);
+    console.log('Email sent: ' + info.response);
     res.send("Email sent");
   } catch (error) {
     console.log(error);
