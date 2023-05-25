@@ -38,7 +38,7 @@ app.post('/bookingPayment', async (req, res) => {
     const mailOptions = {
       from: 'Freeway Scuba Diving',
       to: 'tecnodael@gmail.com',
-      subject: 'Booking Confirmation',
+      subject: 'Complete Booking',
       template: 'email',
       // context: {
       //   name: name,
@@ -47,8 +47,8 @@ app.post('/bookingPayment', async (req, res) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent: ' + info.response);
-    res.send(req.body);
+    // console.log('Email sent: ' + info.response);
+    res.send("Email sent");
   } catch (error) {
     console.log(error);
     res.status(500).send('Error sending email');
