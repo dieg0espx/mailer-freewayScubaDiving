@@ -12,15 +12,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a route
-app.post('/newDestinatary', async (req, res) => {
-  const { email, formTitle } = req.body;
+app.post('/bookingPayment', async (req, res) => {
+  const { name, email, phone, event, date, people, amount, link } = req.body;
 
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'diego@ttfscaffolding.com',
-        pass: 'knenctceisehqgrg'
+        user: 'tecnodael@gmail.com',
+        pass: 'ghtlxjfxetitxwyn'
       }
     });
 
@@ -36,12 +36,19 @@ app.post('/newDestinatary', async (req, res) => {
     transporter.use('compile', hbs(handlebarOptions));
 
     const mailOptions = {
-      from: 'TTF SCAFFOLDING',
+      from: 'Freeway Scuba Diving',
       to: email,
-      subject: formTitle, 
+      subject: 'Complete Booking',
       template: 'email',
       context: {
-        formTitle
+        name: name,
+        phone: phone,
+        email: email,
+        event:event, 
+        date: date, 
+        people: people,
+        amount: amount,
+        link: link
       }
     };
 
